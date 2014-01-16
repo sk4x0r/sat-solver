@@ -1,6 +1,7 @@
 import gbl
 import re
-    
+
+
 dimacsfile="input3.cnf" #CNF file containing formula to be checked for consistency in DIMACS format
 f = open(dimacsfile, 'r')
 data=f.read()
