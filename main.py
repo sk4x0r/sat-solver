@@ -6,8 +6,6 @@ if len(sys.argv)!=2:
 	print "Invalid number of arguments"
 	sys.exit(0)
 
-dimacsfile="input1.cnf" #CNF file containing formula to be checked for consistency in DIMACS format
-dimacsfile="uf50-038.cnf" #CNF file containing formula to be checked for consistency in DIMACS format
 dimacsfile=sys.argv[1].strip()
 f = open(dimacsfile, 'r')
 data=f.read()
@@ -19,7 +17,7 @@ formula=[]
 for line in lines:
     line=line.strip()
     if line=="%" or not line:
-        break
+        continue
     if not commentLine.match(line):
         stats=statLine.match(line)
         if stats:
@@ -33,9 +31,8 @@ for line in lines:
                 if(n!=0):
                     literals.append(-n)
             formula.append(literals)
-#gbl.printSopFormula(formula)
 
 unknowns=[x for x in range(1, varCount+1)] #create list of unknowns
 satisfiable=gbl.newAlgo(formula, unknowns)
 if not satisfiable:
-	print "Unsatisfiable"
+	print "UNSATISFIABLE"
